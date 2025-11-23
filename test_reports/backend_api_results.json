@@ -1,0 +1,59 @@
+{
+  "summary": {
+    "total_tests": 8,
+    "passed_tests": 8,
+    "failed_tests": 0,
+    "success_rate": 100.0
+  },
+  "test_results": [
+    {
+      "test": "API Root",
+      "success": true,
+      "details": "Status: 200 (expected 200)",
+      "timestamp": "2025-11-23T21:12:48.574345"
+    },
+    {
+      "test": "User Registration",
+      "success": true,
+      "details": "Status: 200 (expected 200)",
+      "timestamp": "2025-11-23T21:12:48.866841"
+    },
+    {
+      "test": "Duplicate Email Registration",
+      "success": true,
+      "details": "Status: 400 (expected 400)",
+      "timestamp": "2025-11-23T21:12:48.906611"
+    },
+    {
+      "test": "Valid Login",
+      "success": true,
+      "details": "Status: 200 (expected 200)",
+      "timestamp": "2025-11-23T21:12:49.166341"
+    },
+    {
+      "test": "Token Extraction",
+      "success": true,
+      "details": "JWT token extracted successfully",
+      "timestamp": "2025-11-23T21:12:49.167046"
+    },
+    {
+      "test": "Invalid Login",
+      "success": true,
+      "details": "Status: 401 (expected 401)",
+      "timestamp": "2025-11-23T21:12:49.424624"
+    },
+    {
+      "test": "Token Verification",
+      "success": true,
+      "details": "Status: 200 (expected 200)",
+      "timestamp": "2025-11-23T21:12:49.465535"
+    },
+    {
+      "test": "Invalid Token Verification",
+      "success": true,
+      "details": "Status: 401 (expected 401)",
+      "timestamp": "2025-11-23T21:12:49.501358"
+    }
+  ],
+  "timestamp": "2025-11-23T21:12:49.502255"
+}
