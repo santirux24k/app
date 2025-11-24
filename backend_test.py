@@ -182,6 +182,107 @@ class SAEAPITester:
         self.token = original_token
         return success, response
 
+    def test_get_profile(self):
+        """Test get user profile"""
+        if not self.token:
+            self.log_test("Get Profile", False, "No token available")
+            return False, {}
+            
+        success, response = self.run_test(
+            "Get Profile",
+            "GET",
+            "auth/profile",
+            200
+        )
+        return success, response
+
+    def test_update_profile(self, new_username=None, new_email=None):
+        """Test update user profile"""
+        if not self.token:
+            self.log_test("Update Profile", False, "No token available")
+            return False, {}
+        
+        update_data = {}
+        if new_username:
+            update_data["username"] = new_username
+        if new_email:
+            update_data["email"] = new_email
+            
+        success, response = self.run_test(
+            "Update Profile",
+            "PUT",
+            "auth/profile",
+            200,
+            data=update_data
+        )
+        return success, response
+
+    def test_update_profile_duplicate_username(self, existing_username):
+        """Test update profile with duplicate username"""
+        if not self.token:
+            self.log_test("Update Profile Duplicate Username", False, "No token available")
+            return False, {}
+            
+        success, response = self.run_test(
+            "Update Profile Duplicate Username",
+            "PUT",
+            "auth/profile",
+            400,
+            data={"username": existing_username}
+        )
+        return success, response
+
+    def test_update_password(self, current_password, new_password):
+        """Test update password"""
+        if not self.token:
+            self.log_test("Update Password", False, "No token available")
+            return False, {}
+            
+        success, response = self.run_test(
+            "Update Password",
+            "PUT",
+            "auth/password",
+            200,
+            data={
+                "current_password": current_password,
+                "new_password": new_password
+            }
+        )
+        return success, response
+
+    def test_update_password_wrong_current(self, wrong_password, new_password):
+        """Test update password with wrong current password"""
+        if not self.token:
+            self.log_test("Update Password Wrong Current", False, "No token available")
+            return False, {}
+            
+        success, response = self.run_test(
+            "Update Password Wrong Current",
+            "PUT",
+            "auth/password",
+            400,
+            data={
+                "current_password": wrong_password,
+                "new_password": new_password
+            }
+        )
+        return success, response
+
+    def test_update_avatar(self, avatar_data):
+        """Test update avatar"""
+        if not self.token:
+            self.log_test("Update Avatar", False, "No token available")
+            return False, {}
+            
+        success, response = self.run_test(
+            "Update Avatar",
+            "PUT",
+            "auth/avatar",
+            200,
+            data={"avatar": avatar_data}
+        )
+        return success, response
+
     def print_summary(self):
         """Print test summary"""
         print(f"\n" + "="*60)
