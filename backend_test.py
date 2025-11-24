@@ -354,6 +354,29 @@ def main():
         
         print("\n🔍 Testing Invalid Token...")
         tester.test_verify_invalid_token()
+        
+        print("\n🔍 Testing Profile Management...")
+        # Test get profile
+        tester.test_get_profile()
+        
+        # Test update profile
+        new_username = f"updated_{test_user['username']}"
+        new_email = f"updated_{test_user['email']}"
+        tester.test_update_profile(new_username, new_email)
+        
+        # Test duplicate username (should fail)
+        tester.test_update_profile_duplicate_username(new_username)
+        
+        # Test password update
+        new_password = "NewTestPass456!"
+        tester.test_update_password(test_user["password"], new_password)
+        
+        # Test wrong current password (should fail)
+        tester.test_update_password_wrong_current("wrong_password", "AnotherPass789!")
+        
+        # Test avatar update
+        sample_avatar = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNkYPhfDwAChwGA60e6kgAAAABJRU5ErkJggg=="
+        tester.test_update_avatar(sample_avatar)
     
     # Print final summary
     all_passed = tester.print_summary()
