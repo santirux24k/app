@@ -1,13 +1,12 @@
-import { useState, useEffect } from "react";
 import "@/App.css";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
-import axios from "axios";
 import LoginPage from "@/pages/LoginPage";
 import RegisterPage from "@/pages/RegisterPage";
 import Dashboard from "@/pages/Dashboard";
-
-const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
-const API = `${BACKEND_URL}/api`;
+import ProfilePage from "@/pages/ProfilePage";
+import BiometricPage from "@/pages/BiometricPage";
+import SheetsPage from "@/pages/SheetsPage";
+import Layout from "@/components/Layout";
 
 // Protected Route Component
 const ProtectedRoute = ({ children }) => {
@@ -28,13 +27,18 @@ function App() {
           <Route path="/" element={<LoginPage />} />
           <Route path="/register" element={<RegisterPage />} />
           <Route
-            path="/dashboard"
+            path="/*"
             element={
               <ProtectedRoute>
-                <Dashboard />
+                <Layout />
               </ProtectedRoute>
             }
-          />
+          >
+            <Route path="dashboard" element={<Dashboard />} />
+            <Route path="profile" element={<ProfilePage />} />
+            <Route path="biometric" element={<BiometricPage />} />
+            <Route path="sheets" element={<SheetsPage />} />
+          </Route>
         </Routes>
       </BrowserRouter>
     </div>
